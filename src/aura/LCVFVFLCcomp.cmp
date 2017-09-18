@@ -1,0 +1,54 @@
+<aura:component implements="flexipage:availableForAllPageTypes"
+                access="global" controller="LCVFVFLCcontroller">
+    
+    <aura:attribute name="acc_val" type="List" />
+    <aura:attribute name="mycolumns" type="List"/>
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <aura:attribute name="vfHost" type="String" default="praowin-dev-ed--c.gus.visual.force.com"/>
+    <aura:attribute name="selected_rows" type="List"/>
+    
+    <!-- The Visualforce page to send data to -->
+    <ul class="slds-accordion">
+        <li class="slds-accordion__list-item">
+            <section class="slds-accordion__section slds-is-open">
+                <div class="slds-accordion__summary">
+                    <h3 class="slds-text-heading_small slds-accordion__summary-heading">
+                        <button aria-controls="accordion-details-01" aria-expanded="true" class="slds-button slds-button_reset slds-accordion__summary-action">
+                            
+                            <span class="slds-truncate" title="Accordion summary">Lightning component</span>
+                        </button>
+                    </h3>
+
+                </div>
+                <div aria-hidden="false" class="slds-accordion__content" id="accordion-details-01">
+                    <!-- Input field for message "data" -->
+                    <lightning:datatable data="{! v.acc_val }" 
+                                         columns="{! v.mycolumns }" 
+                                         keyField="id"
+                                         onrowselection="{! c.getSelectedName }"
+                                         class = "LC_table"/>
+                    <!--Account name: <ui:inputtext value="{!v.acc_val.Name}"/><br/>-->
+                    <lightning:button label="Send to VF" onclick="{!c.sendToVF}"/>
+                </div>
+            </section>
+        </li>
+        <li class="slds-accordion__list-item">
+            <section class="slds-accordion__section slds-is-open">
+                <div class="slds-accordion__summary">
+                    <h3 class="slds-text-heading_small slds-accordion__summary-heading">
+                        <button aria-controls="accordion-details-01" aria-expanded="true" class="slds-button slds-button_reset slds-accordion__summary-action">
+                            
+                            <span class="slds-truncate" title="Accordion summary">VF Page</span>
+                        </button>
+                    </h3>
+  
+                </div>
+                <div aria-hidden="false" class="slds-accordion__content" id="accordion-details-01">
+                    <iframe aura:id="vfFrame" src="{!'https://' + v.vfHost + '/apex/myvfpage'}" width="1200" height="800"/>
+                </div>
+            </section>
+        </li>
+        
+    </ul>
+    
+</aura:component>

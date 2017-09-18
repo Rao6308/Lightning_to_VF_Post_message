@@ -1,0 +1,8 @@
+public class LCVFVFLCcontroller {
+
+    @AuraEnabled
+    public static List<account> fetchaccount() {
+    
+        return [select id,name from account limit 10];
+    }
+}

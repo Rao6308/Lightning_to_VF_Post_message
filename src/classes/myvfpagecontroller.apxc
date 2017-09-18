@@ -1,0 +1,19 @@
+public class myvfpagecontroller {
+    public string Lc_data{get;set;}
+    public List<jsonclass> acc_vals{get;set;}
+    
+    public pagereference valuefromLc(){
+         acc_vals = (List<jsonclass>) System.JSON.deserialize(Lc_data, List<jsonclass>.class);
+        
+        return null;
+    }
+    
+    public class jsonclass{
+        public String sobjectType{get;set;}
+		public String AccountName{get;set;}
+        public String confidence{get;set;}
+        public String amount{get;set;}
+        public String contact{get;set;}
+        public String phone{get;set;}
+    }
+}

@@ -1,0 +1,27 @@
+<apex:page lightningStylesheets="true" controller="myvfpagecontroller">
+    <script>
+    var lexOrigin = "https://praowin-dev-ed.lightning.force.com";
+    window.addEventListener("message", function(event) {
+        if (event.origin !== lexOrigin) {
+            // Not the expected origin: reject message!
+            return;
+        }
+        // Handle message
+        passdatatocontroller(event.data);
+    }, false);
+    </script>
+    <apex:form>
+        <apex:actionFunction name="passdatatocontroller" action="{!valuefromLc}" reRender="pg_blk_table">
+            <apex:param name="Lc_data" id="Lc_data" value="" assignTo="{!Lc_data}"/>
+        </apex:actionFunction>
+        <apex:pageBlock>
+            <apex:pageBlockTable value="{!acc_vals}" var="acc" id="pg_blk_table">
+                <apex:column  value="{!acc.AccountName}" headerValue="AccountName"/>
+                <apex:column  value="{!acc.confidence}" headerValue="confidence"/>                
+                <apex:column  value="{!acc.amount}" headerValue="Amount"/>               
+                <apex:column  value="{!acc.contact}" headerValue="Email"/>                
+                <apex:column  value="{!acc.phone}" headerValue="Phone"/>               
+            </apex:pageBlockTable>
+        </apex:pageBlock> 
+    </apex:form>
+</apex:page>
